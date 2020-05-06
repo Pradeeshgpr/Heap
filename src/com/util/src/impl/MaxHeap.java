@@ -3,17 +3,16 @@ package com.util.src.impl;
 import java.util.ArrayList;
 import java.util.Comparator;
 
-public class MinHeap<E> extends AbstractHeap<E> {
-
+public class MaxHeap<E> extends AbstractHeap<E> {
 	private Comparator<E> compare = null;
 
-	public MinHeap(Object compare) {
+	public MaxHeap(Object compare) {
 		// Default setting
 		heap = new ArrayList<E>();
 		this.compare = (Comparator<E>) compare;
 	}
 
-	public MinHeap(int size, Object compare) {
+	public MaxHeap(int size, Object compare) {
 		heap = new ArrayList<E>(size);
 		this.compare = (Comparator<E>) compare;
 	}
@@ -31,11 +30,11 @@ public class MinHeap<E> extends AbstractHeap<E> {
 		if (leftNode != -1 && rightNode != -1) {
 			orderMaxHeapNode(node, leftNode, rightNode);
 		} else if (leftNode != -1) {
-			if (compare.compare(heap.get(leftNode), heap.get(node)) == -1) {
+			if (compare.compare(heap.get(leftNode), heap.get(node)) == 1) {
 				swap(leftNode, node);
 			}
 		} else if (rightNode != -1) {
-			if (compare.compare(heap.get(rightNode), heap.get(node)) == -1) {
+			if (compare.compare(heap.get(rightNode), heap.get(node)) == 1) {
 				swap(rightNode, node);
 			}
 		}
@@ -43,11 +42,11 @@ public class MinHeap<E> extends AbstractHeap<E> {
 
 	private void orderMaxHeapNode(int node, int leftNode, int rightNode) {
 		if (leftNode != -1 && rightNode != -1) {
-			if (compare.compare(heap.get(leftNode), heap.get(rightNode)) == -1
-					&& compare.compare(heap.get(leftNode), heap.get(node)) == -1) {
+			if (compare.compare(heap.get(leftNode), heap.get(rightNode)) == 1
+					&& compare.compare(heap.get(leftNode), heap.get(node)) == 1) {
 				swap(node, leftNode);
-			} else if (compare.compare(heap.get(rightNode), heap.get(leftNode)) == -1
-					&& compare.compare(heap.get(rightNode), heap.get(node)) == -1) {
+			} else if (compare.compare(heap.get(rightNode), heap.get(leftNode)) == 1
+					&& compare.compare(heap.get(rightNode), heap.get(node)) == 1) {
 				swap(node, rightNode);
 			}
 		}
@@ -68,5 +67,4 @@ public class MinHeap<E> extends AbstractHeap<E> {
 		}
 		return -1;
 	}
-
 }
